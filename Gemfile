@@ -25,6 +25,7 @@ group :test do
   gem 'autotest'
   gem 'autotest-rails-pure'
   gem 'test_notifier'
+  gem 'spork', '~>0.9.0.rc4'
 end
 
 
