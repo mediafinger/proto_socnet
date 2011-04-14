@@ -12,6 +12,7 @@ group :development do
 # prevent heroku from using sqlite3-ruby
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'rspec-rails', '~>2.5.0'
+  gem 'haml-rails'
   gem 'annotate-models'
   gem 'faker'
 end
@@ -36,4 +37,7 @@ end
 # gem 'nokogiri'
 
 # gem 'aws-s3', :require => 'aws/s3'
+
+# to generate haml instead of erb - and more
+# gem "nifty-generators"
 
