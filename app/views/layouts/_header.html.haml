@@ -1,7 +1,8 @@
 %header
+  - logo = image_tag("tower_small.jpg", :alt => 'standing out', :class => 'round')
   = link_to logo, root_path
   %nav.round
     %ul
       %li= link_to "home", root_path
-      %li= link_to "sign in", '#'
+      %li= link_to "sign in", signup_path
 

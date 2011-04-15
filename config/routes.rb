@@ -1,9 +1,10 @@
 ProtoSocnet::Application.routes.draw do
 
-  root  :to         => "pages#home"
-  match '/about'    => "pages#about"
-  match '/contact'  => "pages#contact"
-  match '/help'     => "pages#help"
+  root              :to => "pages#home"
+  match '/about',   :to => "pages#about"
+  match '/contact', :to => "pages#contact"
+  match '/help',    :to => "pages#help"
+  match '/signup',  :to => "users#new"
 
 
   # The priority is based upon order of creation:
