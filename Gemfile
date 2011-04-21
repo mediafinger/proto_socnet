@@ -3,8 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.6'
 gem 'sqlite3'
 gem 'haml'
-# gem 'rdiscount'        # to use markdown in haml
-gem 'redcarpet'          # a github replacement for rdiscount
+gem 'rdiscount'             # to use markdown in haml
+# gem 'redcarpet'           # a github replacement for rdiscount
 gem 'will_paginate'
 gem 'gravatar_image_tag'
 
