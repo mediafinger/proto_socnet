@@ -16,6 +16,7 @@ group :development do
   gem 'haml-rails'
   gem 'annotate-models'
   gem 'faker'
+  gem 'awesome_print'
 end
 
 
