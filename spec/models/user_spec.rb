@@ -93,6 +93,35 @@ describe User do
     it "should have an encrypted password attribute" do
       @user.should respond_to(:encrypted_password)
     end
+
+    it "should save the encrypted_password" do
+      @user.encrypted_password.should_not be_blank      # in pure Ruby this would be: encrypted_password.blank? (is not true)
+    end
+
+    describe "has_password? method" do
+      it "should be true, if the passwords match" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+
+      it "should be false, if the passwords do not match" do
+        @user.has_password?("barfoo").should be_false
+      end
+    end
+
+    describe "authenticate method" do
+      it "should return nil on email/password mismatch" do
+        User.authenticate(@user.email, "barfoo").should be_nil
+      end
+
+      it "should return nil for an email address with no user" do
+        User.authenticate("not@saved.blub", @user.password).should be_nil
+      end
+
+      it "should return the User on email/password match" do
+        User.authenticate(@user.email, @user.password).should == @user
+      end
+    end
+
   end
 
 end

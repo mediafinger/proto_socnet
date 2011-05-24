@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110524111058
+# Schema version: 20110524120836
 #
 # Table name: users
 #
@@ -9,7 +9,10 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  encrypted_password :string(255)
+#  salt               :string(255)
 #
+
+require 'digest'
 
 class User < ActiveRecord::Base
   attr_accessor   :password
@@ -25,6 +28,40 @@ class User < ActiveRecord::Base
   validates :password,  :presence     => true,
                         :length       => { :within => 6..30 },
                         :confirmation => true       # automatically creates the virtual attribute password_confirmation
+
+  before_save :encrypt_password
+
+  def self.authenticate(email, submitted_password)
+    user = User.find_by_email(email)
+    if !user.nil? && user.has_password?(submitted_password)
+      user
+    else
+      nil
+    end
+  end
+
+  def has_password?(submitted_password)   # return true if it matches the saved password
+    encrypt(submitted_password) == encrypted_password
+  end
+
+  private
+
+    def encrypt_password
+      self.salt = make_salt if new_record?
+      self.encrypted_password = encrypt(password)
+    end
+
+    def encrypt(string)
+      secure_hash("#{string}--#{salt}")
+    end
+
+    def make_salt
+      secure_hash(Time.now.utc.to_s)
+    end
+
+    def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
+    end
 
 end
 
