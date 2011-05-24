@@ -1,3 +1,13 @@
-= @user.name
-= @user.email
+%table.profile(summary="Profile information")
+  %tr
+    %td.main
+      %h2
+        = gravatar_for @user      #add this optional: , :size => 25
+        = @user.email
+    %td.sidebar.round
+      %strong Name
+      = @user.name
+      %br
+      %strong URL
+      = link_to user_url(@user), @user
 
